@@ -50,7 +50,6 @@ public class DataParser {
             String name = jsonObject.getString("name");
             String firstSurename = jsonObject.getString("firstSurename");
             String email = jsonObject.getString("email");
-            account = new Account(id, name, firstSurename, email);
 
             //Plene el array de contactes
             JSONArray jsonArrayContacts = jsonObject.getJSONArray("contacts");
@@ -83,6 +82,8 @@ public class DataParser {
                 boolean spam = mailsJson.getBoolean("spam");
                 mails.add(new Mail(from, to, subject, body, sentOn, readed, deleted, spam));
             }
+
+            account = new Account(id, name, firstSurename, email, mails, contacts);
 
             parsed = true;
 

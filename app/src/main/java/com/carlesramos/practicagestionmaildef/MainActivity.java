@@ -6,6 +6,7 @@ import com.carlesramos.practicagestionmaildef.fragments.FragmentRecividos;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentGaleria;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentHerramientas;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentPresentacion;
+import com.carlesramos.practicagestionmaildef.parsers.DataParser;
 import com.germangascon.practicagestionmaildef.R;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        DataParser parser = new DataParser(this);
+        parser.parse();
     }
 
     @Override

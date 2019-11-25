@@ -18,7 +18,7 @@ public class FragmentPresentacion extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.frg_recividos, container, false);
-        tvSample = layout.findViewById(R.id.tvSample);
+        //tvSample = layout.findViewById(R.id.tvSample);
         tvSample.setText("Presentación");
         Bundle b = getArguments();
         if(b != null) {
