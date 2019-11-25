@@ -1,6 +1,8 @@
 package com.carlesramos.practicagestionmaildef.model;
 
-public class Mail {
+import java.io.Serializable;
+
+public class Mail implements Serializable {
     private String from;
     private String to;
     private String subject;

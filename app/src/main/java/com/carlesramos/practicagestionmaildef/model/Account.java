@@ -5,14 +5,14 @@ import java.io.Serializable;
 public class Account implements Serializable {
     private int id;
     private String name;
-    private String surename;
-    private String mail;
+    private String firstSurname;
+    private String email;
 
-    public Account(int id, String name, String surename, String mail) {
+    public Account(int id, String name, String firstSurname, String email) {
         this.id = id;
         this.name = name;
-        this.surename = surename;
-        this.mail = mail;
+        this.firstSurname = firstSurname;
+        this.email = email;
     }
 
     public int getId() {
@@ -23,11 +23,11 @@ public class Account implements Serializable {
         return name;
     }
 
-    public String getSurename() {
-        return surename;
+    public String getFirstSurname() {
+        return firstSurname;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 }
