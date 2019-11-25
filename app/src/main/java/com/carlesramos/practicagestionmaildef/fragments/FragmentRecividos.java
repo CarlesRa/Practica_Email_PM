@@ -11,15 +11,15 @@ import android.widget.TextView;
 
 import com.germangascon.practicagestionmaildef.R;
 
-public class FragmentCamara extends Fragment {
+public class FragmentRecividos extends Fragment {
     private TextView tvSample;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.fragment_sample, container, false);
+        View layout = inflater.inflate(R.layout.frg_recividos, container, false);
         tvSample = layout.findViewById(R.id.tvSample);
-        tvSample.setText("Cámara");
+        tvSample.setText("Recividos");
         return layout;
     }
 }
