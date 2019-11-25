@@ -1,4 +1,4 @@
-package com.carlesramos.practicagestionmaildef;
+package com.carlesramos.practicagestionmaildef.fragments;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.germangascon.practicagestionmaildef.R;
 
-public class FragmentGaleria extends Fragment {
+public class FragmentPresentacion extends Fragment {
     private TextView tvSample;
 
     @Nullable
@@ -19,7 +19,13 @@ public class FragmentGaleria extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_sample, container, false);
         tvSample = layout.findViewById(R.id.tvSample);
-        tvSample.setText("Galería");
+        tvSample.setText("Presentación");
+        Bundle b = getArguments();
+        if(b != null) {
+            if(b.containsKey("SHARE")) {
+                tvSample.setText(b.getString("SHARE"));
+            }
+        }
         return layout;
     }
 }

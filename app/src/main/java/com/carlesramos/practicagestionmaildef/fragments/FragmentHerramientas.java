@@ -1,4 +1,4 @@
-package com.carlesramos.practicagestionmaildef;
+package com.carlesramos.practicagestionmaildef.fragments;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;

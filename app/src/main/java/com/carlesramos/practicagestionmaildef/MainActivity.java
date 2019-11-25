@@ -2,6 +2,10 @@ package com.carlesramos.practicagestionmaildef;
 
 import android.os.Bundle;
 
+import com.carlesramos.practicagestionmaildef.fragments.FragmentCamara;
+import com.carlesramos.practicagestionmaildef.fragments.FragmentGaleria;
+import com.carlesramos.practicagestionmaildef.fragments.FragmentHerramientas;
+import com.carlesramos.practicagestionmaildef.fragments.FragmentPresentacion;
 import com.germangascon.practicagestionmaildef.R;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
