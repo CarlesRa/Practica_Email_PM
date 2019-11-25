@@ -1,4 +1,4 @@
-package com.germangascon.navigationdrawersample;
+package com.carlesramos.practicagestionmaildef;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class FragmentGaleria extends Fragment {
+import com.germangascon.practicagestionmaildef.R;
+
+public class FragmentHerramientas extends Fragment {
     private TextView tvSample;
 
     @Nullable
@@ -17,7 +19,7 @@ public class FragmentGaleria extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_sample, container, false);
         tvSample = layout.findViewById(R.id.tvSample);
-        tvSample.setText("Galería");
+        tvSample.setText("Herramientas");
         return layout;
     }
 }

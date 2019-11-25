@@ -1,4 +1,4 @@
-package com.germangascon.navigationdrawersample;
+package com.carlesramos.practicagestionmaildef;
 
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class FragmentCamara extends Fragment {
+import com.germangascon.practicagestionmaildef.R;
+
+public class FragmentPresentacion extends Fragment {
     private TextView tvSample;
 
     @Nullable
@@ -17,7 +19,13 @@ public class FragmentCamara extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_sample, container, false);
         tvSample = layout.findViewById(R.id.tvSample);
-        tvSample.setText("Cámara");
+        tvSample.setText("Presentación");
+        Bundle b = getArguments();
+        if(b != null) {
+            if(b.containsKey("SHARE")) {
+                tvSample.setText(b.getString("SHARE"));
+            }
+        }
         return layout;
     }
 }

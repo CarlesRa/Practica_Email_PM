@@ -1,4 +1,4 @@
-package com.germangascon.navigationdrawersample;
+package com.germangascon.practicagestionmaildef;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;

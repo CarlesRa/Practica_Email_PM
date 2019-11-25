@@ -1,4 +1,4 @@
-package com.germangascon.navigationdrawersample;
+package com.germangascon.practicagestionmaildef;
 
 import org.junit.Test;
 

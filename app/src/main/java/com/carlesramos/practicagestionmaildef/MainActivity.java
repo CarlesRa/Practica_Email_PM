@@ -1,6 +1,8 @@
-package com.germangascon.navigationdrawersample;
+package com.carlesramos.practicagestionmaildef;
 
 import android.os.Bundle;
+
+import com.germangascon.practicagestionmaildef.R;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
