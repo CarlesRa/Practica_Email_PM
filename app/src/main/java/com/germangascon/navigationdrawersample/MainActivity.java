@@ -71,19 +71,19 @@ public class MainActivity extends AppCompatActivity
         // Se ha hecho click en algún item del NavigationView
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_recividos) {
             f = new FragmentCamara();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Cámara");
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.enviados) {
             f = new FragmentGaleria();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Galería");
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.no_leidos) {
             f = new FragmentPresentacion();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Presentación");
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.enviar) {
             f = new FragmentHerramientas();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Herramientas");
