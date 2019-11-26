@@ -5,15 +5,15 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_recividos"
+            android:id="@+id/nav_recibidos"
             android:icon="@android:drawable/ic_menu_more"
             android:title="@string/correo_recividos" />
         <item
-            android:id="@+id/enviados"
+            android:id="@+id/nav_enviados"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/correo_enviados" />
         <item
-            android:id="@+id/no_leidos"
+            android:id="@+id/nav_spam"
             android:icon="@android:drawable/star_big_off"
             android:title="@string/correo_noleidos" />
         <item

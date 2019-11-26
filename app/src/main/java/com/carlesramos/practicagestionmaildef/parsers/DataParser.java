@@ -83,7 +83,6 @@ public class DataParser {
                 boolean spam = mailsJson.getBoolean("spam");
                 mails.add(new Mail(from, to, subject, body, sentOn, readed, deleted, spam));
             }
-
             account = new Account(id, name, firstSurename, email, mails, contacts);
 
             parsed = true;

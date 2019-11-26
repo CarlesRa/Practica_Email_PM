@@ -2,6 +2,7 @@ package com.carlesramos.practicagestionmaildef.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,11 +24,16 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
     private Account acount;
     private Context context;
     private IMailListener listener;
+   /* private ArrayList<Mail> mailsRecibidos;
+    private ArrayList<Mail> mailsEnviados;
+    private Arraylist*/
+    private MenuItem menuItem;
 
-    public MailAdapter(Context c, Account a, IMailListener listener){
+    public MailAdapter(Context c, Account a, IMailListener listener, MenuItem item){
         this.acount = a;
         this.context = c;
         this.listener = listener;
+        //mailsRecibidos = new ArrayList<>();
     }
 
     @NonNull
@@ -40,22 +46,26 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
 
     @Override
     public void onBindViewHolder(@NonNull RecibidosViewHolder holder, int position) {
-
-        Mail mail = acount.getMails().get(position);
         ArrayList<Contact> contacts = acount.getConacts();
+        ArrayList<Mail> mails;
+
+        mails = acount.getMailsRecibidos();
+        Mail mail = mails.get(position);
         Contact contact = null;
-        for (int i=0; i<contacts.size(); i++){
-            if (mail.getFrom().equals(contacts.get(i).getEmail())){
-                contact = contacts.get(i);
-                return;
+        for (int z=0; z<contacts.size(); z++) {
+            if (mail.getFrom().equals(contacts.get(z).getEmail())) {
+                contact = contacts.get(z);
             }
         }
-        holder.bindMail(mail, contact);
+        if (contact != null){
+            holder.bindMail(mail, contact);
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return acount.getMails().size();
+        return acount.getMailsRecibidos().size();
     }
 
     public static class RecibidosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -77,7 +87,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             tvNombre = itemView.findViewById(R.id.tvNombre);
             tvAsunto = itemView.findViewById(R.id.tvAsunto);
             tvMensaje = itemView.findViewById(R.id.tvMensaje);
-            tvDiaMes = itemView.findViewById(R.id.tvHora);
+            tvDiaMes = itemView.findViewById(R.id.tvDiaMes);
             tvHora = itemView.findViewById(R.id.tvHora);
 
             this.listener = listener;
@@ -85,7 +95,6 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         }
 
         public void bindMail(Mail m, Contact c){
-            //TODO averiguar que pasarle para poder averiguar la foto
             String nameFoto = "c" + c.getFoto();
             int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
             if (resID != 0){
@@ -95,7 +104,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
                 int resIDDefault = context.getResources().getIdentifier("defaultFoto","drawable",context.getPackageName());
                 ivFoto.setImageResource(resIDDefault);
             }
-            tvNombre.setText(c.getName());
+            tvNombre.setText(m.getFrom());
             tvAsunto.setText(m.getSubject());
             tvMensaje.setText(m.getBody());
             String[] fechaComleta = m.getSentOn().split("-");
@@ -152,4 +161,14 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
     }
+
+   /* public void llenarRecibidos(ArrayList<Mail> mails){
+        for (int i=0; i<mails.size(); i++){
+            if (mails.get(i).getTo().equals(acount.getEmail()) && mails.get(i).isDeleted() == false
+            && mails.get(i).isSpam() == false){
+                mailsRecibidos.add(mails.get(i));
+            }
+        }
+    }*/
+
 }

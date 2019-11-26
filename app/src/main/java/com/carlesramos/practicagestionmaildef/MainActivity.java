@@ -2,7 +2,7 @@ package com.carlesramos.practicagestionmaildef;
 
 import android.os.Bundle;
 
-import com.carlesramos.practicagestionmaildef.fragments.FragmentRecibidos;
+import com.carlesramos.practicagestionmaildef.fragments.FragmentListadoEmails;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentGaleria;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentHerramientas;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentPresentacion;
@@ -82,18 +82,18 @@ public class MainActivity extends AppCompatActivity
         // Se ha hecho click en algún item del NavigationView
         int id = item.getItemId();
 
-        if (id == R.id.nav_recividos) {
-            f = new FragmentRecibidos();
+        if (id == R.id.nav_recibidos) {
+            f = new FragmentListadoEmails(item);
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
-            setTitle("Cámara");
-        } else if (id == R.id.enviados) {
-            f = new FragmentGaleria();
+            setTitle("Recibidos");
+        } else if (id == R.id.nav_enviados) {
+            f = new FragmentListadoEmails(item);
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
-            setTitle("Galería");
-        } else if (id == R.id.no_leidos) {
+            setTitle("Enviados");
+        } else if (id == R.id.nav_spam) {
             f = new FragmentPresentacion();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
-            setTitle("Presentación");
+            setTitle("Espam");
         } else if (id == R.id.enviar) {
             f = new FragmentHerramientas();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
