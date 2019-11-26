@@ -6,8 +6,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="correo_recividos">Reciveds</string>
+    <string name="correo_recibidos">Reciveds</string>
     <string name="correo_enviados">Sended</string>
-    <string name="correo_noleidos">Not Read</string>
+    <string name="correo_Spam">Spam</string>
     <string name="correo_enviar">Sent</string>
 </resources>

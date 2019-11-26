@@ -1,13 +1,18 @@
 package com.carlesramos.practicagestionmaildef.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class Mail implements Serializable {
+public class Mail implements Serializable, Comparable<Mail> {
+
     private String from;
     private String to;
     private String subject;
     private String body;
     private String sentOn;
+    private Date fechaEnvio;
     private boolean readed;
     private boolean deleted;
     private boolean spam;
@@ -18,6 +23,7 @@ public class Mail implements Serializable {
         this.subject = subject;
         this.body = body;
         this.sentOn = sentOn;
+        this.fechaEnvio = convertToCalendar(sentOn);
         this.readed = readed;
         this.deleted = deleted;
         this.spam = spam;
@@ -53,5 +59,30 @@ public class Mail implements Serializable {
 
     public boolean isSpam() {
         return spam;
+    }
+
+    public Date getFechaEnvio() {
+        return fechaEnvio;
+    }
+
+    public Date convertToCalendar(String fecha){
+        Date c = null;
+        try {
+            c = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
+
+    @Override
+    public int compareTo(Mail mail) {
+        if (this.getFechaEnvio().before(mail.getFechaEnvio())){
+            return 1;
+        }
+        if (this.getFechaEnvio().after((mail.getFechaEnvio()))){
+            return -1;
+        }
+        return 0;
     }
 }

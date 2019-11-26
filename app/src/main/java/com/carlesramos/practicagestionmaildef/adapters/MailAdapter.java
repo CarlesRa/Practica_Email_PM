@@ -73,15 +73,16 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         }
         else if (id == R.id.nav_spam) {
             mails = acount.getMailsSpam();
+            mail = mails.get(position);
+            for (int z=0; z<contacts.size(); z++) {
+                if (mail.isSpam()) {
+                    contact = contacts.get(z);
+                    holder.bindMail(mail, contact, item);
+                }
+            }
+            return;
         }
 
-        /*Mail mail = mails.get(position);
-        Contact contact = null;
-        for (int z=0; z<contacts.size(); z++) {
-            if (mail.getFrom().equals(contacts.get(z).getEmail())) {
-                contact = contacts.get(z);
-            }
-        }*/
         if (contact != null){
             holder.bindMail(mail, contact, item);
         }
@@ -142,15 +143,14 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
                 ivFoto.setImageResource(resIDDefault);
             }
             if (id == R.id.nav_recibidos) {
-                tvNombre.setText(m.getFrom());
+                tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
             }
             else if (id == R.id.nav_enviados) {
-                tvNombre.setText(m.getTo());
+                tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
             }
             else if (id == R.id.nav_spam) {
-                tvNombre.setText(m.getTo());
+                tvNombre.setText(m.getFrom());
             }
-            //tvNombre.setText(m.getFrom());
             tvAsunto.setText(m.getSubject());
             tvMensaje.setText(m.getBody());
             String[] fechaComleta = m.getSentOn().split("-");
@@ -207,15 +207,4 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
     }
-
-
-   /* public void llenarRecibidos(ArrayList<Mail> mails){
-        for (int i=0; i<mails.size(); i++){
-            if (mails.get(i).getTo().equals(acount.getEmail()) && mails.get(i).isDeleted() == false
-            && mails.get(i).isSpam() == false){
-                mailsRecibidos.add(mails.get(i));
-            }
-        }
-    }*/
-
 }

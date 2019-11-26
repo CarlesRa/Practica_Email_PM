@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_recibidos"
             android:icon="@android:drawable/ic_menu_more"
-            android:title="@string/correo_recividos" />
+            android:title="@string/correo_recibidos" />
         <item
             android:id="@+id/nav_enviados"
             android:icon="@drawable/ic_menu_send"
@@ -15,7 +15,7 @@
         <item
             android:id="@+id/nav_spam"
             android:icon="@android:drawable/star_big_off"
-            android:title="@string/correo_noleidos" />
+            android:title="@string/correo_Spam" />
         <item
             android:id="@+id/enviar"
             android:icon="@android:drawable/ic_menu_send"

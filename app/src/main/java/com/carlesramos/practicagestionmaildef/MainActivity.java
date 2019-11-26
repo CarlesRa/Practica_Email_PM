@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Enviados");
         } else if (id == R.id.nav_spam) {
-            f = new FragmentPresentacion();
+            f = new FragmentListadoEmails(item);
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Espam");
         } else if (id == R.id.enviar) {

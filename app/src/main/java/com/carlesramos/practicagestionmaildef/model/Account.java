@@ -2,8 +2,10 @@ package com.carlesramos.practicagestionmaildef.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Account implements Serializable {
+
     private int id;
     private String name;
     private String firstSurname;
@@ -16,6 +18,7 @@ public class Account implements Serializable {
 
     public Account(int id, String name, String firstSurname, String email
             , ArrayList<Mail> mails, ArrayList<Contact> contacts) {
+
         this.id = id;
         this.name = name;
         this.firstSurname = firstSurname;
@@ -56,18 +59,20 @@ public class Account implements Serializable {
     }
 
     public ArrayList<Mail> getMailsRecibidos() {
+        Collections.sort(mailsRecibidos);
         return mailsRecibidos;
     }
 
     public ArrayList<Mail> getMailsEnviados() {
+        Collections.sort(mailsEnviados);
         return mailsEnviados;
     }
 
     public ArrayList<Mail> getMailsSpam() {
+        Collections.sort(mailsSpam);
         return mailsSpam;
     }
 
-    //TODO faltan crear los mails recividos en account
 
     public void llenarRecibidos(){
         for (int i=0; i<mails.size(); i++){
@@ -92,5 +97,4 @@ public class Account implements Serializable {
             }
         }
     }
-
 }
