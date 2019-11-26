@@ -2,7 +2,7 @@ package com.carlesramos.practicagestionmaildef;
 
 import android.os.Bundle;
 
-import com.carlesramos.practicagestionmaildef.fragments.FragmentRecividos;
+import com.carlesramos.practicagestionmaildef.fragments.FragmentRecibidos;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentGaleria;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentHerramientas;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentPresentacion;
@@ -16,7 +16,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_recividos) {
-            f = new FragmentRecividos();
+            f = new FragmentRecibidos();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Cámara");
         } else if (id == R.id.enviados) {
