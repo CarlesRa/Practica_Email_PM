@@ -3,6 +3,7 @@ package com.carlesramos.practicagestionmaildef.model;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Mail implements Serializable, Comparable<Mail> {
@@ -12,7 +13,7 @@ public class Mail implements Serializable, Comparable<Mail> {
     private String subject;
     private String body;
     private String sentOn;
-    private Date fechaEnvio;
+    private Calendar fechaEnvio;
     private boolean readed;
     private boolean deleted;
     private boolean spam;
@@ -23,7 +24,8 @@ public class Mail implements Serializable, Comparable<Mail> {
         this.subject = subject;
         this.body = body;
         this.sentOn = sentOn;
-        this.fechaEnvio = convertToCalendar(sentOn);
+        this.fechaEnvio = Calendar.getInstance();
+        fechaEnvio.setTime(convertToCalendar(sentOn));
         this.readed = readed;
         this.deleted = deleted;
         this.spam = spam;
@@ -61,7 +63,7 @@ public class Mail implements Serializable, Comparable<Mail> {
         return spam;
     }
 
-    public Date getFechaEnvio() {
+    public Calendar getFechaEnvio() {
         return fechaEnvio;
     }
 

@@ -27,6 +27,10 @@ public class Contact implements Serializable {
         this.adress = adress;
     }
 
+    public Contact(){
+        this.foto = 0;
+    }
+
     public int getId() {
         return id;
     }

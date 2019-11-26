@@ -6,6 +6,7 @@ import com.carlesramos.practicagestionmaildef.fragments.FragmentListadoEmails;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentGaleria;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentHerramientas;
 import com.carlesramos.practicagestionmaildef.fragments.FragmentPresentacion;
+import com.carlesramos.practicagestionmaildef.interficies.IMailListener;
 import com.carlesramos.practicagestionmaildef.parsers.DataParser;
 import com.germangascon.practicagestionmaildef.R;
 import com.google.android.material.navigation.NavigationView;
@@ -20,7 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, IMailListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,5 +113,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onMailSelected(int position) {
+
     }
 }

@@ -18,6 +18,8 @@ import com.carlesramos.practicagestionmaildef.model.Mail;
 import com.germangascon.practicagestionmaildef.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewHolder>{
 
@@ -74,17 +76,13 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         else if (id == R.id.nav_spam) {
             mails = acount.getMailsSpam();
             mail = mails.get(position);
-            for (int z=0; z<contacts.size(); z++) {
-                if (mail.isSpam()) {
-                    contact = contacts.get(z);
-                    holder.bindMail(mail, contact, item);
-                }
-            }
-            return;
         }
 
         if (contact != null){
             holder.bindMail(mail, contact, item);
+        }
+        else if (contact == null && id == R.id.nav_spam){
+            holder.bindMail(mail, new Contact(), item);
         }
 
     }
@@ -132,6 +130,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         }
 
         public void bindMail(Mail m, Contact c, MenuItem item){
+
             int id = item.getItemId();
             String nameFoto = "c" + c.getFoto();
             int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
@@ -196,7 +195,12 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
                     mes = "dic.";
                     break;
             }
-            tvDiaMes.setText(dia + " " + mes);
+            Locale l = new Locale("es_ES");
+            String month = m.getFechaEnvio().getDisplayName(Calendar.MONTH, Calendar.LONG
+                    , l.getDefault()).toLowerCase().substring(0,3) + ".";
+            String day ;
+
+            tvDiaMes.setText(dia + " " + month);
             tvHora.setText(hora);
         }
 
