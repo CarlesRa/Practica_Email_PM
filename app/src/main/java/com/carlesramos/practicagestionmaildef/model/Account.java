@@ -27,6 +27,7 @@ public class Account implements Serializable {
         mailsSpam = new ArrayList<>();
         llenarRecibidos();
         llenarEnviados();
+        llenarEspam();
 
     }
 
@@ -56,6 +57,14 @@ public class Account implements Serializable {
 
     public ArrayList<Mail> getMailsRecibidos() {
         return mailsRecibidos;
+    }
+
+    public ArrayList<Mail> getMailsEnviados() {
+        return mailsEnviados;
+    }
+
+    public ArrayList<Mail> getMailsSpam() {
+        return mailsSpam;
     }
 
     //TODO faltan crear los mails recividos en account
