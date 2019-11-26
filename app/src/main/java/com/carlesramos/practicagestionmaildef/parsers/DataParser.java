@@ -46,10 +46,11 @@ public class DataParser {
 
             //Plene el conte de correu
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            int id = jsonObject.getInt("id");
-            String name = jsonObject.getString("name");
-            String firstSurename = jsonObject.getString("firstSurename");
-            String email = jsonObject.getString("email");
+            JSONObject jsonObjectAccount = jsonObject.getJSONObject("myAccount");
+            int id = jsonObjectAccount.getInt("id");
+            String name = jsonObjectAccount.getString("name");
+            String firstSurename = jsonObjectAccount.getString("firstSurname");
+            String email = jsonObjectAccount.getString("email");
 
             //Plene el array de contactes
             JSONArray jsonArrayContacts = jsonObject.getJSONArray("contacts");
@@ -60,11 +61,11 @@ public class DataParser {
                 String firstSurnameContact = contactsJson.getString("firstSurname");
                 String secondSurnameContact = contactsJson.getString("secondSurname");
                 String birthContact = contactsJson.getString("birth");
-                int fotoContact = contactsJson.getInt("foro");
+                int fotoContact = contactsJson.getInt("foto");
                 String emailContact = contactsJson.getString("email");
                 String phone1Contact = contactsJson.getString("phone1");
                 String phone2Contact = contactsJson.getString("phone2");
-                String adressContact = contactsJson.getString("adress");
+                String adressContact = contactsJson.getString("address");
                 contacts.add(new Contact(idContact, nameContact, firstSurnameContact, secondSurnameContact
                 , birthContact, fotoContact, emailContact, phone1Contact, phone2Contact, adressContact));
             }

@@ -55,7 +55,7 @@ public class FragmentRecividos extends Fragment {
             itemView.setOnClickListener(this);
         }
 
-        public void bindMail(Account a, int position){
+        public void bindMail(Account a){
             //TODO averiguar que pasarle para poder averiguar la vandera
         }
 
