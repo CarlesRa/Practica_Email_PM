@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/ivDetalleFoto"
             android:layout_width="85dp"
             android:layout_height="99dp"
             android:layout_marginTop="30dp"
@@ -32,7 +32,7 @@
             android:layout_marginTop="30dp"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/ivDetalleFoto" />
 
         <TextView
             android:id="@+id/tvDetalleFechaHora"
