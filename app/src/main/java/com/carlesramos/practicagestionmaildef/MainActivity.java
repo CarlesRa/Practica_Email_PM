@@ -1,16 +1,14 @@
 package com.carlesramos.practicagestionmaildef;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.carlesramos.practicagestionmaildef.fragments.FragmentListadoEmails;
-import com.carlesramos.practicagestionmaildef.fragments.FragmentGaleria;
-import com.carlesramos.practicagestionmaildef.fragments.FragmentHerramientas;
-import com.carlesramos.practicagestionmaildef.fragments.FragmentPresentacion;
 import com.carlesramos.practicagestionmaildef.interficies.IMailListener;
 import com.carlesramos.practicagestionmaildef.parsers.DataParser;
 import com.germangascon.practicagestionmaildef.R;
 import com.google.android.material.navigation.NavigationView;
-import androidx.fragment.app.Fragment;
+
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -79,33 +77,25 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        Fragment f;
+        FragmentListadoEmails f;
         // Se ha hecho click en algún item del NavigationView
         int id = item.getItemId();
 
         if (id == R.id.nav_recibidos) {
             f = new FragmentListadoEmails(item);
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+            f.setMailListener(this);
             setTitle("Recibidos");
         } else if (id == R.id.nav_enviados) {
             f = new FragmentListadoEmails(item);
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+            f.setMailListener(this);
             setTitle("Enviados");
         } else if (id == R.id.nav_spam) {
             f = new FragmentListadoEmails(item);
+            f.setMailListener(this);
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Espam");
-        } else if (id == R.id.enviar) {
-            f = new FragmentHerramientas();
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
-            setTitle("Herramientas");
-        } else if (id == R.id.nav_share) {
-            Bundle b = new Bundle();
-            f = new FragmentPresentacion();
-            b.putString("SHARE", "Mi texto");
-            f.setArguments(b);
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).addToBackStack(null).commit();
-            setTitle("Compartir");
         } else if (id == R.id.nav_send) {
 
         }
@@ -117,6 +107,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMailSelected(int position) {
-
+        Intent i = new Intent(this, DetalleActivity.class);
+        startActivity(i);
     }
 }
