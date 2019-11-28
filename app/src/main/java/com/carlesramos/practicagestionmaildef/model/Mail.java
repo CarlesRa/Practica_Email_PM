@@ -77,6 +77,10 @@ public class Mail implements Serializable, Comparable<Mail> {
         return c;
     }
 
+    public void setReaded(boolean readed) {
+        this.readed = readed;
+    }
+
     @Override
     public int compareTo(Mail mail) {
         if (this.getFechaEnvio().before(mail.getFechaEnvio())){

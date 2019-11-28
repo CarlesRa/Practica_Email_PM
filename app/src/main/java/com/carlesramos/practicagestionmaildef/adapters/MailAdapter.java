@@ -1,22 +1,21 @@
 package com.carlesramos.practicagestionmaildef.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.carlesramos.practicagestionmaildef.interficies.IMailListener;
 import com.carlesramos.practicagestionmaildef.model.Account;
 import com.carlesramos.practicagestionmaildef.model.Contact;
 import com.carlesramos.practicagestionmaildef.model.Mail;
 import com.germangascon.practicagestionmaildef.R;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -47,12 +46,12 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
     @Override
     public void onBindViewHolder(@NonNull RecibidosViewHolder holder, int position) {
         ArrayList<Contact> contacts = acount.getConacts();
-        ArrayList<Mail> mails;
         int id = item.getItemId();
         Mail mail = null;
         Contact contact = null;
+        ArrayList<Mail> mails;
         if (id == R.id.nav_recibidos) {
-            mails = acount.getMailsRecibidos();
+            mails = acount.getMails();
             mail = mails.get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getFrom().equals(contacts.get(z).getEmail())) {
@@ -62,6 +61,24 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         }
         else if (id == R.id.nav_enviados) {
             mails = acount.getMailsEnviados();
+            mail = mails.get(position);
+            for (int z=0; z<contacts.size(); z++) {
+                if (mail.getTo().equals(contacts.get(z).getEmail())) {
+                    contact = contacts.get(z);
+                }
+            }
+        }
+        else if (id == R.id.nav_noleidos){
+            mails = acount.getMailsNoLeidos();
+            mail = mails.get(position);
+            for (int z=0; z<contacts.size(); z++) {
+                if (mail.getTo().equals(contacts.get(z).getEmail())) {
+                    contact = contacts.get(z);
+                }
+            }
+        }
+        else if (id == R.id.nav_borrados){
+            mails = acount.getMailsBorrados();
             mail = mails.get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getTo().equals(contacts.get(z).getEmail())) {
@@ -83,20 +100,30 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
 
     }
 
+    //TODO pensar en la forma de camviar la forma de traure nombre de items
     @Override
     public int getItemCount() {
-        int id = item.getItemId();
 
-        if (id == R.id.nav_recibidos) {
-            return acount.getMailsRecibidos().size();
-        }
-        else if (id == R.id.nav_enviados) {
-            return acount.getMailsEnviados().size();
-        }
-        else if (id == R.id.nav_spam) {
-            return acount.getMailsSpam().size();
+        if (item != null){
+            int id = item.getItemId();
+            if (id == R.id.nav_recibidos) {
+                return acount.getMails().size();
+            }
+            else if (id == R.id.nav_enviados) {
+                return acount.getMailsEnviados().size();
+            }
+            else if (id == R.id.nav_spam) {
+                return acount.getMailsSpam().size();
+            }
+            else if (id == R.id.nav_noleidos){
+                return acount.getMailsNoLeidos().size();
+            }
+            else if (id == R.id.nav_borrados){
+                return acount.getMailsBorrados().size();
+            }
         }
         return 0;
+        //return mails.size();
     }
 
     public static class RecibidosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -130,6 +157,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
 
             this.m = m;
             int id = item.getItemId();
+
             if (c != null){
                 String nameFoto = "c" + c.getFoto();
                 int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
@@ -145,8 +173,14 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             else if (id == R.id.nav_enviados) {
                 tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
             }
+            else if (id == R.id.nav_noleidos){
+                tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
+            }
             else if (id == R.id.nav_spam) {
                 tvNombre.setText(m.getFrom());
+            }
+            else if (id == R.id.nav_borrados){
+                tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
             }
             tvAsunto.setText(m.getSubject());
             tvMensaje.setText(m.getBody());
@@ -160,6 +194,18 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
 
             tvDiaMes.setText(dia + " " + month);
             tvHora.setText(hora);
+            if (!m.isReaded()){
+                tvNombre.setTypeface(null, Typeface.BOLD);
+                tvAsunto.setTypeface(null, Typeface.BOLD);
+                tvDiaMes.setTextColor(Color.BLUE);
+                tvHora.setTextColor(Color.BLUE);
+            }
+            else{
+                tvNombre.setTypeface(null, Typeface.NORMAL);
+                tvAsunto.setTypeface(null, Typeface.NORMAL);
+                tvDiaMes.setTextColor(Color.BLACK);
+                tvHora.setTextColor(Color.BLACK);
+            }
         }
 
         @Override

@@ -10,8 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.carlesramos.practicagestionmaildef.DetalleActivity;
 import com.carlesramos.practicagestionmaildef.model.Contact;
 import com.carlesramos.practicagestionmaildef.model.Mail;
 import com.carlesramos.practicagestionmaildef.parsers.DataParser;

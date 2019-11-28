@@ -12,9 +12,11 @@ public class Account implements Serializable {
     private String email;
     private ArrayList<Mail> mails;
     private ArrayList<Contact> conacts;
-    private ArrayList<Mail> mailsRecibidos;
+    private ArrayList<Mail> mailsNoLeidos;
     private ArrayList<Mail> mailsEnviados;
     private ArrayList<Mail> mailsSpam;
+    private ArrayList<Mail> mailsBorrados;
+
 
     public Account(int id, String name, String firstSurname, String email
             , ArrayList<Mail> mails, ArrayList<Contact> contacts) {
@@ -25,12 +27,14 @@ public class Account implements Serializable {
         this.email = email;
         this.mails = mails;
         this.conacts = contacts;
-        mailsRecibidos = new ArrayList<>();
+        mailsNoLeidos = new ArrayList<>();
         mailsEnviados = new ArrayList<>();
         mailsSpam = new ArrayList<>();
-        llenarRecibidos();
+        mailsBorrados = new ArrayList<>();
+        llenarNoLeidos();
         llenarEnviados();
         llenarEspam();
+        llenarBorrados();
 
     }
 
@@ -51,6 +55,7 @@ public class Account implements Serializable {
     }
 
     public ArrayList<Mail> getMails() {
+        Collections.sort(mails);
         return mails;
     }
 
@@ -58,9 +63,9 @@ public class Account implements Serializable {
         return conacts;
     }
 
-    public ArrayList<Mail> getMailsRecibidos() {
-        Collections.sort(mailsRecibidos);
-        return mailsRecibidos;
+    public ArrayList<Mail> getMailsNoLeidos() {
+        Collections.sort(mailsNoLeidos);
+        return mailsNoLeidos;
     }
 
     public ArrayList<Mail> getMailsEnviados() {
@@ -73,18 +78,24 @@ public class Account implements Serializable {
         return mailsSpam;
     }
 
+    public ArrayList<Mail> getMailsBorrados() {
+        return mailsBorrados;
+    }
 
-    public void llenarRecibidos(){
+    public void llenarNoLeidos(){
         for (int i=0; i<mails.size(); i++){
-            if (mails.get(i).getTo().equals(this.getEmail())){
-                mailsRecibidos.add(mails.get(i));
+            for (int z=0; z<conacts.size(); z++) {
+                if (!mails.get(i).isReaded() && mails.get(i).getTo().equals(conacts.get(z).getEmail())
+                && !mails.get(i).isDeleted()) {
+                    mailsNoLeidos.add(mails.get(i));
+                }
             }
         }
     }
 
     public void llenarEnviados(){
         for (int i=0; i<mails.size(); i++){
-            if (!mails.get(i).getTo().equals(this.getEmail())){
+            if (!mails.get(i).getTo().equals(this.getEmail()) && !mails.get(i).isDeleted()){
                 mailsEnviados.add(mails.get(i));
             }
         }
@@ -92,8 +103,16 @@ public class Account implements Serializable {
 
     public void llenarEspam(){
         for (int i=0; i<mails.size(); i++){
-            if (mails.get(i).isSpam()){
+            if (mails.get(i).isSpam() && !mails.get(i).isDeleted()){
                 mailsSpam.add(mails.get(i));
+            }
+        }
+    }
+
+    public void llenarBorrados(){
+        for (int i=0; i<mails.size(); i++){
+            if (mails.get(i).isDeleted() && !mails.get(i).getTo().equals(this.getEmail())){
+                mailsBorrados.add(mails.get(i));
             }
         }
     }

@@ -114,8 +114,16 @@ public class MainActivity extends AppCompatActivity
             f.setMailListener(this);
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Espam");
-        } else if (id == R.id.nav_send) {
-            //TODO implementar la ultima part del exercici
+        } else if (id == R.id.nav_noleidos) {
+            f = new FragmentListadoEmails(item);
+            f.setMailListener(this);
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+            setTitle("No Leidos");
+        } else if (id == R.id.nav_borrados){
+            f = new FragmentListadoEmails(item);
+            f.setMailListener(this);
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
+            setTitle("Borrados");
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onMailSelected(Mail email) {
+        email.setReaded(true);
         Intent i = new Intent(this, DetalleActivity.class);
         i.putExtra(DetalleActivity.EXTRA_TEXTO, email);
         startActivity(i);

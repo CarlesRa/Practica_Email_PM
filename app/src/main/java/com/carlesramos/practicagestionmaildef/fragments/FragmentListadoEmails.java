@@ -25,8 +25,12 @@ public class FragmentListadoEmails extends Fragment {
     private IMailListener listener;
     private MenuItem item;
 
+
     public FragmentListadoEmails(MenuItem item){
         this.item = item;
+    }
+    public FragmentListadoEmails(){
+
     }
 
     @Nullable

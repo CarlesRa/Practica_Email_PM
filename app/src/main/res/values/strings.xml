@@ -10,4 +10,6 @@
     <string name="correo_enviados">Sended</string>
     <string name="correo_Spam">Spam</string>
     <string name="correo_enviar">Sent</string>
+    <string name="correo_no_leido">Not readed</string>
+    <string name="papelera">Garbage</string>
 </resources>
