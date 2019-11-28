@@ -30,17 +30,10 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
     private ArrayList<Mail> mailsEnviados;
     private ArrayList<Mail> mailsSpam;
     private ArrayList<Mail> mailsBorrados;
-
-    /*public MailAdapter(Context c, Account a, IMailListener listener, MenuItem item){
-
-        this.acount = a;
-        this.context = c;
-        this.listener = listener;
-        this.item = item;
-    }*/
+    private ArrayList<Mail> mailsRecibidos;
 
     public MailAdapter(Account acount, Context context, IMailListener listener, MenuItem item, ArrayList<Mail> mailsNoLeidos
-            , ArrayList<Mail> mailsEnviados, ArrayList<Mail> mailsSpam, ArrayList<Mail> mailsBorrados) {
+            , ArrayList<Mail> mailsEnviados, ArrayList<Mail> mailsSpam, ArrayList<Mail> mailsBorrados, ArrayList<Mail>mailsRecibidos) {
         this.acount = acount;
         this.context = context;
         this.listener = listener;
@@ -49,6 +42,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         this.mailsEnviados = mailsEnviados;
         this.mailsSpam = mailsSpam;
         this.mailsBorrados = mailsBorrados;
+        this.mailsRecibidos = mailsRecibidos;
     }
 
     @NonNull
@@ -65,36 +59,31 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         int id = item.getItemId();
         Mail mail = null;
         Contact contact = null;
-        ArrayList<Mail> mails;
         if (id == R.id.nav_recibidos) {
-            //mails = acount.getMails();
-            mail = acount.getMails().get(position);
+            mail = mailsRecibidos.get(position);
+            for (int z=0; z<contacts.size(); z++) {
+                if (mail.getFrom().equals(contacts.get(z).getEmail()) && !mail.getFrom().equals(acount.getEmail())) {
+                    contact = contacts.get(z);
+                }
+            }
+        }
+        else if (id == R.id.nav_enviados) {
+            mail = mailsEnviados.get(position);
+            for (int z=0; z<contacts.size(); z++) {
+                if (mail.getTo().equals(contacts.get(z).getEmail()) && mail.getFrom().equals(acount.getEmail())){
+                    contact = contacts.get(z);
+                }
+            }
+        }
+        else if (id == R.id.nav_noleidos){
+            mail = mailsNoLeidos.get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getFrom().equals(contacts.get(z).getEmail())) {
                     contact = contacts.get(z);
                 }
             }
         }
-        else if (id == R.id.nav_enviados) {
-            //mails = acount.getMailsEnviados();
-            mail = mailsEnviados.get(position);
-            for (int z=0; z<contacts.size(); z++) {
-                if (mail.getTo().equals(contacts.get(z).getEmail())) {
-                    contact = contacts.get(z);
-                }
-            }
-        }
-        else if (id == R.id.nav_noleidos){
-            //mails = acount.getMailsNoLeidos();
-            mail = mailsNoLeidos.get(position);
-            for (int z=0; z<contacts.size(); z++) {
-                if (mail.getTo().equals(contacts.get(z).getEmail())) {
-                    contact = contacts.get(z);
-                }
-            }
-        }
         else if (id == R.id.nav_borrados){
-            //mails = acount.getMailsBorrados();
             mail = mailsBorrados.get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getTo().equals(contacts.get(z).getEmail())) {
@@ -103,17 +92,19 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
         else if (id == R.id.nav_spam) {
-            //mails = acount.getMailsSpam();
             mail = mailsSpam.get(position);
         }
 
         if (contact != null){
             holder.bindMail(mail, contact, item);
         }
-        else if (contact == null && id == R.id.nav_spam){
+        else if (id == R.id.nav_enviados){
+            holder.bindMail(mail,new Contact(acount.getName(),acount.getFirstSurname(), ""
+            ,acount.getEmail(), -1),item);
+        }
+        else if (id == R.id.nav_spam){
             holder.bindMail(mail, contact, item);
         }
-
     }
 
     //TODO pensar en la forma de camviar la forma de traure nombre de items
@@ -123,7 +114,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         if (item != null){
             int id = item.getItemId();
             if (id == R.id.nav_recibidos) {
-                return acount.getMails().size();
+                return mailsRecibidos.size();
             }
             else if (id == R.id.nav_enviados) {
                 return mailsEnviados.size();
@@ -139,7 +130,6 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
         return 0;
-        //return mails.size();
     }
 
     public static class RecibidosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -177,7 +167,13 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             if (c != null){
                 String nameFoto = "c" + c.getFoto();
                 int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
-                ivFoto.setImageResource(resID);
+                if (c.getFoto() != -1) {
+                    ivFoto.setImageResource(resID);
+                }
+                else{
+                    int resIDDefault = context.getResources().getIdentifier("default_person","drawable",context.getPackageName());
+                    ivFoto.setImageResource(resIDDefault);
+                }
             }
             else{
                 int resIDDefault = context.getResources().getIdentifier("default_person","drawable",context.getPackageName());

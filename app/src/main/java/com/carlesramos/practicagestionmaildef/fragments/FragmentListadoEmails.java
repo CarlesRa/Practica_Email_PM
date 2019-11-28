@@ -31,6 +31,7 @@ public class FragmentListadoEmails extends Fragment {
     private ArrayList<Mail> mailsEnviados;
     private ArrayList<Mail> mailsSpam;
     private ArrayList<Mail> mailsBorrados;
+    private ArrayList<Mail> mailsRecibidos;
 
     public FragmentListadoEmails(MenuItem item){
         this.item = item;
@@ -49,6 +50,7 @@ public class FragmentListadoEmails extends Fragment {
             mailsEnviados = parser.getMailsEnviados();
             mailsBorrados = parser.getMailsBorrados();
             mailsSpam = parser.getMailsSpam();
+            mailsRecibidos = parser.getMailsRecibidos();
         }
         return inflater.inflate(R.layout.frg_emails, container, false);
     }
@@ -57,7 +59,8 @@ public class FragmentListadoEmails extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         rvRecibidos = getView().findViewById(R.id.rvEmails);
-        rvRecibidos.setAdapter(new MailAdapter(account,getActivity(),listener, item,mailsNoLeidos,mailsEnviados,mailsSpam,mailsBorrados));
+        rvRecibidos.setAdapter(new MailAdapter(account,getActivity(),listener, item,mailsNoLeidos
+                ,mailsEnviados,mailsSpam,mailsBorrados,mailsRecibidos));
         rvRecibidos.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 

@@ -12,7 +12,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.CollationElementIterator;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class DataParser {
     private ArrayList<Contact> contacts;
@@ -23,6 +25,7 @@ public class DataParser {
     private ArrayList<Mail> mailsEnviados;
     private ArrayList<Mail> mailsSpam;
     private ArrayList<Mail> mailsBorrados;
+    private ArrayList<Mail> mailsRecibidos;
     public DataParser(Context c) {
 
         dataFile = c.getResources().openRawResource(R.raw.correos);
@@ -39,6 +42,7 @@ public class DataParser {
         mailsEnviados = new ArrayList<>();
         mailsSpam = new ArrayList<>();
         mailsBorrados = new ArrayList<>();
+        mailsRecibidos = new ArrayList<>();
 
         try {
             int size = dataFile.available();
@@ -103,7 +107,7 @@ public class DataParser {
         llenarEnviados();
         llenarEspam();
         llenarBorrados();
-
+        llenrRecibidos();
         return parsed;
     }
 
@@ -115,40 +119,53 @@ public class DataParser {
         return contacts;
     }
 
-    public ArrayList<Mail> getMails(){
-        return mails;
+    public ArrayList<Mail> getMailsRecibidos(){
+        Collections.sort(mailsRecibidos);
+        return mailsRecibidos;
     }
 
     public ArrayList<Mail> getMailsBorrados() {
+        Collections.sort(mailsBorrados);
         return mailsBorrados;
     }
 
     public ArrayList<Mail> getMailsEnviados() {
+        Collections.sort(mailsEnviados);
         return mailsEnviados;
     }
 
     public ArrayList<Mail> getMailsNoLeidos() {
+        Collections.sort(mailsNoLeidos);
         return mailsNoLeidos;
     }
 
     public ArrayList<Mail> getMailsSpam() {
+        Collections.sort(mailsSpam);
         return mailsSpam;
     }
 
+    public void llenrRecibidos(){
+        for (int i=0; i < mails.size(); i++){
+            if ( !mails.get(i).getFrom().equals(account.getEmail())
+                    && !mails.get(i).isDeleted()){
+                mailsRecibidos.add(mails.get(i));
+            }
+        }
+    }
     public void llenarNoLeidos(){
         for (int i=0; i<mails.size(); i++){
-            for (int z=0; z<contacts.size(); z++) {
-                if (!mails.get(i).isReaded() && mails.get(i).getTo().equals(contacts.get(z).getEmail())
-                        && !mails.get(i).isDeleted()) {
+
+            if (!mails.get(i).isReaded() && !mails.get(i).getFrom().equals(account.getEmail())
+                    && !mails.get(i).isDeleted() && !mails.get(i).isSpam()) {
                     mailsNoLeidos.add(mails.get(i));
-                }
             }
         }
     }
 
     public void llenarEnviados(){
         for (int i=0; i<mails.size(); i++){
-            if (!mails.get(i).getTo().equals(account.getEmail()) && !mails.get(i).isDeleted()){
+            if (!mails.get(i).getFrom().equals(account.getEmail()) && !mails.get(i).isDeleted()
+            && !mails.get(i).isSpam()){
                 mailsEnviados.add(mails.get(i));
             }
         }

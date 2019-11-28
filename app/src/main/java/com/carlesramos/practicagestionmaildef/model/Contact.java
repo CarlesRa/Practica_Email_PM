@@ -26,6 +26,18 @@ public class Contact implements Serializable {
         this.phone2 = phone2;
         this.adress = adress;
     }
+    public Contact(String name, String firstSurname, String secondSureName, String email, int foto) {
+        this.id = id;
+        this.name = name;
+        this.firstSurname = firstSurname;
+        this.secondSurname = secondSurname;
+        this.birth = birth;
+        this.foto = foto;
+        this.email = email;
+        this.phone1 = phone1;
+        this.phone2 = phone2;
+        this.adress = adress;
+    }
 
     public Contact(){
         this.foto = 0;
