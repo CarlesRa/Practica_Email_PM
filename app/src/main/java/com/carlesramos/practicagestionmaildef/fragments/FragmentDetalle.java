@@ -61,7 +61,7 @@ public class FragmentDetalle extends Fragment {
                 tvMensaje.setText(m.getBody());
             }
             else{
-                int resIDDefault = context.getResources().getIdentifier("defaultFoto","drawable",context.getPackageName());
+                int resIDDefault = context.getResources().getIdentifier("default_person","drawable",context.getPackageName());
                 ivFoto.setImageResource(resIDDefault);
                 tvNombre.setText(m.getFrom());
                 tvFechaHora.setText(m.getSentOn());

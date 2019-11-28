@@ -78,7 +78,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             holder.bindMail(mail, contact, item);
         }
         else if (contact == null && id == R.id.nav_spam){
-            holder.bindMail(mail, new Contact(), item);
+            holder.bindMail(mail, contact, item);
         }
 
     }
@@ -130,13 +130,13 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
 
             this.m = m;
             int id = item.getItemId();
-            String nameFoto = "c" + c.getFoto();
-            int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
-            if (resID != 0){
+            if (c != null){
+                String nameFoto = "c" + c.getFoto();
+                int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
                 ivFoto.setImageResource(resID);
             }
             else{
-                int resIDDefault = context.getResources().getIdentifier("defaultFoto","drawable",context.getPackageName());
+                int resIDDefault = context.getResources().getIdentifier("default_person","drawable",context.getPackageName());
                 ivFoto.setImageResource(resIDDefault);
             }
             if (id == R.id.nav_recibidos) {
