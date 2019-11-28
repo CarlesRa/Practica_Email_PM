@@ -26,17 +26,14 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
     private Account acount;
     private Context context;
     private IMailListener listener;
-   /* private ArrayList<Mail> mailsRecibidos;
-    private ArrayList<Mail> mailsEnviados;
-    private Arraylist*/
     private MenuItem item;
 
     public MailAdapter(Context c, Account a, IMailListener listener, MenuItem item){
+
         this.acount = a;
         this.context = c;
         this.listener = listener;
         this.item = item;
-        //mailsRecibidos = new ArrayList<>();
     }
 
     @NonNull
@@ -51,7 +48,6 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
     public void onBindViewHolder(@NonNull RecibidosViewHolder holder, int position) {
         ArrayList<Contact> contacts = acount.getConacts();
         ArrayList<Mail> mails;
-        mails = new ArrayList<>();
         int id = item.getItemId();
         Mail mail = null;
         Contact contact = null;
@@ -113,6 +109,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         private TextView tvHora;
         private Context context;
         private IMailListener listener;
+        private Mail m;
 
         public RecibidosViewHolder(@NonNull View itemView, Context context, IMailListener listener) {
             super(itemView);
@@ -131,6 +128,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
 
         public void bindMail(Mail m, Contact c, MenuItem item){
 
+            this.m = m;
             int id = item.getItemId();
             String nameFoto = "c" + c.getFoto();
             int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
@@ -153,52 +151,12 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             tvAsunto.setText(m.getSubject());
             tvMensaje.setText(m.getBody());
             String[] fechaComleta = m.getSentOn().split("-");
-            String mes = fechaComleta[1];
             String[] diaHora = fechaComleta[2].split(" ");
             String dia = diaHora[0];
             String hora = diaHora[1];
-            switch (Integer.parseInt(mes)){
-                case 1:
-                    mes = "ene.";
-                    break;
-                case 2:
-                    mes = "feb.";
-                    break;
-                case 3:
-                    mes = "mar.";
-                    break;
-                case 4:
-                    mes = "abr.";
-                    break;
-                case 5:
-                    mes = "may.";
-                    break;
-                case 6:
-                    mes = "jun.";
-                    break;
-                case 7:
-                    mes = "jul.";
-                    break;
-                case 8:
-                    mes = "ago.";
-                    break;
-                case 9:
-                    mes = "sep.";
-                    break;
-                case 10:
-                    mes = "oct.";
-                    break;
-                case 11:
-                    mes = "nov.";
-                    break;
-                case 12:
-                    mes = "dic.";
-                    break;
-            }
             Locale l = new Locale("es_ES");
             String month = m.getFechaEnvio().getDisplayName(Calendar.MONTH, Calendar.LONG
                     , l.getDefault()).toLowerCase().substring(0,3) + ".";
-            String day ;
 
             tvDiaMes.setText(dia + " " + month);
             tvHora.setText(hora);
@@ -207,7 +165,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         @Override
         public void onClick(View view) {
             if (listener != null){
-                listener.onMailSelected(getAdapterPosition());
+                listener.onMailSelected(m);
             }
         }
     }

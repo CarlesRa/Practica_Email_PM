@@ -16,23 +16,16 @@
             android:id="@+id/nav_spam"
             android:icon="@android:drawable/star_big_off"
             android:title="@string/correo_Spam" />
-        <item
-            android:id="@+id/enviar"
-            android:icon="@android:drawable/ic_menu_send"
-            android:title="@string/correo_enviar" />
     </group>
 
-    <item android:title="Social">
+    <item android:title="@string/correo_enviar">
         <menu>
             <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="Compartir"/>
+
                 <item
                     android:id="@+id/nav_send"
                     android:icon="@drawable/ic_menu_send"
-                    android:title="Enviar"/>
+                    android:title="@string/correo_enviar" />
             </group>
         </menu>
     </item>

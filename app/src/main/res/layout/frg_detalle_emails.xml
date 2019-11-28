@@ -14,22 +14,22 @@
 
         <ImageView
             android:id="@+id/ivDetalleFoto"
-            android:layout_width="85dp"
-            android:layout_height="99dp"
+            android:layout_width="198dp"
+            android:layout_height="175dp"
             android:layout_marginTop="30dp"
+            android:contentDescription="TODO"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/default_person"
-            android:contentDescription="TODO" />
+            app:srcCompat="@drawable/default_person" />
 
         <TextView
             android:id="@+id/tvDetalleNom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivDetalleFoto" />
@@ -38,9 +38,9 @@
             android:id="@+id/tvDetalleFechaHora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="text View"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDetalleNom" />
@@ -49,9 +49,9 @@
             android:id="@+id/tvDetalleAsunto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:text="text View"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDetalleFechaHora" />

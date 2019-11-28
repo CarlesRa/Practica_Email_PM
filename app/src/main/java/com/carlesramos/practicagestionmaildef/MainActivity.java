@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.carlesramos.practicagestionmaildef.fragments.FragmentListadoEmails;
 import com.carlesramos.practicagestionmaildef.interficies.IMailListener;
+import com.carlesramos.practicagestionmaildef.model.Account;
+import com.carlesramos.practicagestionmaildef.model.Mail;
 import com.carlesramos.practicagestionmaildef.parsers.DataParser;
 import com.germangascon.practicagestionmaildef.R;
 import com.google.android.material.navigation.NavigationView;
@@ -17,9 +19,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IMailListener{
+
+    private DataParser parser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +44,24 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        DataParser parser = new DataParser(this);
-        parser.parse();
+        parser = new DataParser(this);
+
+        View hView =  navigationView.getHeaderView(0);
+
+        ImageView navFoto = (ImageView)hView.findViewById(R.id.ivImagenUsuario);
+        TextView navUser = (TextView)hView.findViewById(R.id.tvNombreUsuario);
+        TextView navMail = (TextView)hView.findViewById(R.id.tvCorreoUsuario);
+
+        if (parser.parse()){
+            Account a = parser.getAccount();
+            String nameFoto = "c" + 0;
+            int resID = getResources().getIdentifier(nameFoto, "drawable", getPackageName());
+            navFoto.setImageResource(resID);
+            navUser.setText(a.getName() + " " + a.getFirstSurname());
+            navMail.setText(a.getEmail());
+        }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -106,8 +128,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMailSelected(int position) {
+    public void onMailSelected(Mail email) {
         Intent i = new Intent(this, DetalleActivity.class);
+        i.putExtra(DetalleActivity.EXTRA_TEXTO, email);
         startActivity(i);
     }
 }
