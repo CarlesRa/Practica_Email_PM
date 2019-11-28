@@ -8,7 +8,9 @@ import com.carlesramos.practicagestionmaildef.interficies.IMailListener;
 import com.carlesramos.practicagestionmaildef.model.Account;
 import com.carlesramos.practicagestionmaildef.model.Mail;
 import com.carlesramos.practicagestionmaildef.parsers.DataParser;
+import com.germangascon.navigationdrawersample.NuevoMensajeActivity;
 import com.germangascon.practicagestionmaildef.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.core.view.GravityCompat;
@@ -22,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, IMailListener{
@@ -52,6 +55,14 @@ public class MainActivity extends AppCompatActivity
         TextView navUser = hView.findViewById(R.id.tvNombreUsuario);
         TextView navMail = hView.findViewById(R.id.tvCorreoUsuario);
 
+        FloatingActionButton fabMensajeNuevo = findViewById(R.id.fabNewMail);
+        fabMensajeNuevo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, NuevoMensajeActivity.class);
+                startActivity(i);
+            }
+        });
         if (parser.parse()){
             Account a = parser.getAccount();
             int resID = getResources().getIdentifier("default_person", "drawable", getPackageName());

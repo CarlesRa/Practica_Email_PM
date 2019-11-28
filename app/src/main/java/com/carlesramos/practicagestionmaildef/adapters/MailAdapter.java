@@ -167,19 +167,10 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
                 int resIDDefault = context.getResources().getIdentifier("default_person","drawable",context.getPackageName());
                 ivFoto.setImageResource(resIDDefault);
             }
-            if (id == R.id.nav_recibidos) {
-                tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
-            }
-            else if (id == R.id.nav_enviados) {
-                tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
-            }
-            else if (id == R.id.nav_noleidos){
-                tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
-            }
-            else if (id == R.id.nav_spam) {
+            if (id == R.id.nav_spam) {
                 tvNombre.setText(m.getFrom());
             }
-            else if (id == R.id.nav_borrados){
+            else {
                 tvNombre.setText(c.getName() + " " + c.getFirstSurname() + " " + c.getSecondSurname());
             }
             tvAsunto.setText(m.getSubject());
