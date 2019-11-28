@@ -48,14 +48,13 @@ public class MainActivity extends AppCompatActivity
 
         View hView =  navigationView.getHeaderView(0);
 
-        ImageView navFoto = (ImageView)hView.findViewById(R.id.ivImagenUsuario);
-        TextView navUser = (TextView)hView.findViewById(R.id.tvNombreUsuario);
-        TextView navMail = (TextView)hView.findViewById(R.id.tvCorreoUsuario);
+        ImageView navFoto = hView.findViewById(R.id.ivImagenUsuario);
+        TextView navUser = hView.findViewById(R.id.tvNombreUsuario);
+        TextView navMail = hView.findViewById(R.id.tvCorreoUsuario);
 
         if (parser.parse()){
             Account a = parser.getAccount();
-            String nameFoto = "c" + 0;
-            int resID = getResources().getIdentifier(nameFoto, "drawable", getPackageName());
+            int resID = getResources().getIdentifier("default_person", "drawable", getPackageName());
             navFoto.setImageResource(resID);
             navUser.setText(a.getName() + " " + a.getFirstSurname());
             navMail.setText(a.getEmail());
@@ -80,14 +79,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflamos el menú de la ActionBar
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Se ha hecho click en algún item del menú de la ActionBar
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
@@ -100,7 +97,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         FragmentListadoEmails f;
-        // Se ha hecho click en algún item del NavigationView
         int id = item.getItemId();
 
         if (id == R.id.nav_recibidos) {
@@ -119,7 +115,7 @@ public class MainActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, f).commit();
             setTitle("Espam");
         } else if (id == R.id.nav_send) {
-
+            //TODO implementar la ultima part del exercici
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
