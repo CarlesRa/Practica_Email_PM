@@ -23,11 +23,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:clickable="true"
             android:focusable="true"
-            android:src="@android:drawable/ic_input_add"
-            android:layout_marginRight="20dp" />
+            android:src="@android:drawable/ic_menu_edit" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

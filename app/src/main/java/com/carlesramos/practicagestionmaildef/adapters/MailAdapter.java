@@ -70,7 +70,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         else if (id == R.id.nav_enviados) {
             mail = mailsEnviados.get(position);
             for (int z=0; z<contacts.size(); z++) {
-                if (mail.getTo().equals(contacts.get(z).getEmail()) && mail.getFrom().equals(acount.getEmail())){
+                if (mail.getTo().equals(contacts.get(z).getEmail())) {
                     contact = contacts.get(z);
                 }
             }
@@ -86,7 +86,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         else if (id == R.id.nav_borrados){
             mail = mailsBorrados.get(position);
             for (int z=0; z<contacts.size(); z++) {
-                if (mail.getTo().equals(contacts.get(z).getEmail())) {
+                if (mail.getFrom().equals(contacts.get(z).getEmail())) {
                     contact = contacts.get(z);
                 }
             }
@@ -98,10 +98,10 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         if (contact != null){
             holder.bindMail(mail, contact, item);
         }
-        else if (id == R.id.nav_enviados){
+        /*else if (id == R.id.nav_enviados){
             holder.bindMail(mail,new Contact(acount.getName(),acount.getFirstSurname(), ""
             ,acount.getEmail(), -1),item);
-        }
+        }*/
         else if (id == R.id.nav_spam){
             holder.bindMail(mail, contact, item);
         }

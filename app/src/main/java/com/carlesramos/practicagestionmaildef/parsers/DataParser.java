@@ -164,8 +164,7 @@ public class DataParser {
 
     public void llenarEnviados(){
         for (int i=0; i<mails.size(); i++){
-            if (!mails.get(i).getFrom().equals(account.getEmail()) && !mails.get(i).isDeleted()
-            && !mails.get(i).isSpam()){
+            if (!mails.get(i).getTo().equals(account.getEmail()) && !mails.get(i).isDeleted()){
                 mailsEnviados.add(mails.get(i));
             }
         }
@@ -181,7 +180,7 @@ public class DataParser {
 
     public void llenarBorrados(){
         for (int i=0; i<mails.size(); i++){
-            if (mails.get(i).isDeleted() && !mails.get(i).getTo().equals(account.getEmail())){
+            if (mails.get(i).isDeleted() && !mails.get(i).getFrom().equals(account.getEmail())){
                 mailsBorrados.add(mails.get(i));
             }
         }
