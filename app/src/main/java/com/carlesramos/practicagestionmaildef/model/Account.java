@@ -27,14 +27,15 @@ public class Account implements Serializable {
         this.email = email;
         this.mails = mails;
         this.conacts = contacts;
-        mailsNoLeidos = new ArrayList<>();
+
+        /*mailsNoLeidos = new ArrayList<>();
         mailsEnviados = new ArrayList<>();
         mailsSpam = new ArrayList<>();
         mailsBorrados = new ArrayList<>();
         llenarNoLeidos();
         llenarEnviados();
         llenarEspam();
-        llenarBorrados();
+        llenarBorrados();*/
 
     }
 
@@ -63,7 +64,7 @@ public class Account implements Serializable {
         return conacts;
     }
 
-    public ArrayList<Mail> getMailsNoLeidos() {
+    /*public ArrayList<Mail> getMailsNoLeidos() {
         Collections.sort(mailsNoLeidos);
         return mailsNoLeidos;
     }
@@ -115,5 +116,5 @@ public class Account implements Serializable {
                 mailsBorrados.add(mails.get(i));
             }
         }
-    }
+    }*/
 }

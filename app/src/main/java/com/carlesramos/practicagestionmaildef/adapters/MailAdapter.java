@@ -26,13 +26,29 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
     private Context context;
     private IMailListener listener;
     private MenuItem item;
+    private ArrayList<Mail> mailsNoLeidos;
+    private ArrayList<Mail> mailsEnviados;
+    private ArrayList<Mail> mailsSpam;
+    private ArrayList<Mail> mailsBorrados;
 
-    public MailAdapter(Context c, Account a, IMailListener listener, MenuItem item){
+    /*public MailAdapter(Context c, Account a, IMailListener listener, MenuItem item){
 
         this.acount = a;
         this.context = c;
         this.listener = listener;
         this.item = item;
+    }*/
+
+    public MailAdapter(Account acount, Context context, IMailListener listener, MenuItem item, ArrayList<Mail> mailsNoLeidos
+            , ArrayList<Mail> mailsEnviados, ArrayList<Mail> mailsSpam, ArrayList<Mail> mailsBorrados) {
+        this.acount = acount;
+        this.context = context;
+        this.listener = listener;
+        this.item = item;
+        this.mailsNoLeidos = mailsNoLeidos;
+        this.mailsEnviados = mailsEnviados;
+        this.mailsSpam = mailsSpam;
+        this.mailsBorrados = mailsBorrados;
     }
 
     @NonNull
@@ -51,8 +67,8 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         Contact contact = null;
         ArrayList<Mail> mails;
         if (id == R.id.nav_recibidos) {
-            mails = acount.getMails();
-            mail = mails.get(position);
+            //mails = acount.getMails();
+            mail = acount.getMails().get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getFrom().equals(contacts.get(z).getEmail())) {
                     contact = contacts.get(z);
@@ -60,8 +76,8 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
         else if (id == R.id.nav_enviados) {
-            mails = acount.getMailsEnviados();
-            mail = mails.get(position);
+            //mails = acount.getMailsEnviados();
+            mail = mailsEnviados.get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getTo().equals(contacts.get(z).getEmail())) {
                     contact = contacts.get(z);
@@ -69,8 +85,8 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
         else if (id == R.id.nav_noleidos){
-            mails = acount.getMailsNoLeidos();
-            mail = mails.get(position);
+            //mails = acount.getMailsNoLeidos();
+            mail = mailsNoLeidos.get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getTo().equals(contacts.get(z).getEmail())) {
                     contact = contacts.get(z);
@@ -78,8 +94,8 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
         else if (id == R.id.nav_borrados){
-            mails = acount.getMailsBorrados();
-            mail = mails.get(position);
+            //mails = acount.getMailsBorrados();
+            mail = mailsBorrados.get(position);
             for (int z=0; z<contacts.size(); z++) {
                 if (mail.getTo().equals(contacts.get(z).getEmail())) {
                     contact = contacts.get(z);
@@ -87,8 +103,8 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
         }
         else if (id == R.id.nav_spam) {
-            mails = acount.getMailsSpam();
-            mail = mails.get(position);
+            //mails = acount.getMailsSpam();
+            mail = mailsSpam.get(position);
         }
 
         if (contact != null){
@@ -110,16 +126,16 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
                 return acount.getMails().size();
             }
             else if (id == R.id.nav_enviados) {
-                return acount.getMailsEnviados().size();
+                return mailsEnviados.size();
             }
             else if (id == R.id.nav_spam) {
-                return acount.getMailsSpam().size();
+                return mailsSpam.size();
             }
             else if (id == R.id.nav_noleidos){
-                return acount.getMailsNoLeidos().size();
+                return mailsNoLeidos.size();
             }
             else if (id == R.id.nav_borrados){
-                return acount.getMailsBorrados().size();
+                return mailsBorrados.size();
             }
         }
         return 0;

@@ -15,8 +15,11 @@ import android.view.ViewGroup;
 import com.carlesramos.practicagestionmaildef.adapters.MailAdapter;
 import com.carlesramos.practicagestionmaildef.interficies.IMailListener;
 import com.carlesramos.practicagestionmaildef.model.Account;
+import com.carlesramos.practicagestionmaildef.model.Mail;
 import com.carlesramos.practicagestionmaildef.parsers.DataParser;
 import com.germangascon.practicagestionmaildef.R;
+
+import java.util.ArrayList;
 
 public class FragmentListadoEmails extends Fragment {
 
@@ -24,7 +27,10 @@ public class FragmentListadoEmails extends Fragment {
     private Account account;
     private IMailListener listener;
     private MenuItem item;
-
+    private ArrayList<Mail> mailsNoLeidos;
+    private ArrayList<Mail> mailsEnviados;
+    private ArrayList<Mail> mailsSpam;
+    private ArrayList<Mail> mailsBorrados;
 
     public FragmentListadoEmails(MenuItem item){
         this.item = item;
@@ -39,6 +45,10 @@ public class FragmentListadoEmails extends Fragment {
         DataParser parser = new DataParser(getActivity());
         if (parser.parse()){
             this.account = parser.getAccount();
+            mailsNoLeidos = parser.getMailsNoLeidos();
+            mailsEnviados = parser.getMailsEnviados();
+            mailsBorrados = parser.getMailsBorrados();
+            mailsSpam = parser.getMailsSpam();
         }
         return inflater.inflate(R.layout.frg_emails, container, false);
     }
@@ -47,7 +57,7 @@ public class FragmentListadoEmails extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         rvRecibidos = getView().findViewById(R.id.rvEmails);
-        rvRecibidos.setAdapter(new MailAdapter(getActivity(),account,listener, item));
+        rvRecibidos.setAdapter(new MailAdapter(account,getActivity(),listener, item,mailsNoLeidos,mailsEnviados,mailsSpam,mailsBorrados));
         rvRecibidos.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
     }
 
