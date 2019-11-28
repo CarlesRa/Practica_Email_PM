@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -103,11 +102,8 @@ public class DataParser {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        llenarNoLeidos();
-        llenarEnviados();
-        llenarEspam();
-        llenarBorrados();
-        llenrRecibidos();
+
+        lenarMails();
         return parsed;
     }
 
@@ -144,42 +140,27 @@ public class DataParser {
         return mailsSpam;
     }
 
-    public void llenrRecibidos(){
+    public void lenarMails(){
         for (int i=0; i < mails.size(); i++){
+            //mails recividos
             if ( !mails.get(i).getFrom().equals(account.getEmail())
                     && !mails.get(i).isDeleted()){
                 mailsRecibidos.add(mails.get(i));
             }
-        }
-    }
-    public void llenarNoLeidos(){
-        for (int i=0; i<mails.size(); i++){
-
+            //mails noleidos
             if (!mails.get(i).isReaded() && !mails.get(i).getFrom().equals(account.getEmail())
                     && !mails.get(i).isDeleted() && !mails.get(i).isSpam()) {
-                    mailsNoLeidos.add(mails.get(i));
+                mailsNoLeidos.add(mails.get(i));
             }
-        }
-    }
-
-    public void llenarEnviados(){
-        for (int i=0; i<mails.size(); i++){
+            //mails enviados
             if (!mails.get(i).getTo().equals(account.getEmail()) && !mails.get(i).isDeleted()){
                 mailsEnviados.add(mails.get(i));
             }
-        }
-    }
-
-    public void llenarEspam(){
-        for (int i=0; i<mails.size(); i++){
+            //mails spam
             if (mails.get(i).isSpam() && !mails.get(i).isDeleted()){
                 mailsSpam.add(mails.get(i));
             }
-        }
-    }
-
-    public void llenarBorrados(){
-        for (int i=0; i<mails.size(); i++){
+            //mails borrados
             if (mails.get(i).isDeleted() && !mails.get(i).getFrom().equals(account.getEmail())){
                 mailsBorrados.add(mails.get(i));
             }

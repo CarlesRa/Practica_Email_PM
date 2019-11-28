@@ -42,13 +42,14 @@
         app:layout_constraintTop_toBottomOf="@+id/tvNuevoAsunto">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiMensaje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Message" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/etMail"
         android:layout_width="341dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -60,14 +61,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/etAsunto"
         android:layout_width="328dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toEndOf="@+id/tvNuevoAsunto"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/etMail" />
 
     <Button
         android:id="@+id/btNuevoCorreoEnviar"

@@ -1,8 +1,11 @@
 package com.carlesramos.practicagestionmaildef.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.recyclerview.widget.RecyclerView;
 import com.carlesramos.practicagestionmaildef.interficies.IMailListener;
 import com.carlesramos.practicagestionmaildef.model.Account;
@@ -98,10 +103,7 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         if (contact != null){
             holder.bindMail(mail, contact, item);
         }
-        /*else if (id == R.id.nav_enviados){
-            holder.bindMail(mail,new Contact(acount.getName(),acount.getFirstSurname(), ""
-            ,acount.getEmail(), -1),item);
-        }*/
+
         else if (id == R.id.nav_spam){
             holder.bindMail(mail, contact, item);
         }
@@ -160,7 +162,9 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
         }
 
         public void bindMail(Mail m, Contact c, MenuItem item){
-
+            Drawable originalDrawable;
+            Bitmap originalBitmap;
+            RoundedBitmapDrawable roundedBitmapDrawable;
             this.m = m;
             int id = item.getItemId();
 
@@ -168,7 +172,11 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
                 String nameFoto = "c" + c.getFoto();
                 int resID = context.getResources().getIdentifier(nameFoto, "drawable", context.getPackageName());
                 if (c.getFoto() != -1) {
-                    ivFoto.setImageResource(resID);
+                    originalDrawable = context.getResources().getDrawable(resID);
+                    originalBitmap = ((BitmapDrawable) originalDrawable).getBitmap();
+                    roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), originalBitmap);
+                    roundedBitmapDrawable.setCornerRadius(originalBitmap.getHeight());
+                    ivFoto.setImageDrawable(roundedBitmapDrawable);
                 }
                 else{
                     int resIDDefault = context.getResources().getIdentifier("default_person","drawable",context.getPackageName());
@@ -177,7 +185,11 @@ public class MailAdapter extends RecyclerView.Adapter<MailAdapter.RecibidosViewH
             }
             else{
                 int resIDDefault = context.getResources().getIdentifier("default_person","drawable",context.getPackageName());
-                ivFoto.setImageResource(resIDDefault);
+                originalDrawable = context.getResources().getDrawable(resIDDefault);
+                originalBitmap = ((BitmapDrawable) originalDrawable).getBitmap();
+                roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), originalBitmap);
+                roundedBitmapDrawable.setCornerRadius(originalBitmap.getHeight());
+                ivFoto.setImageDrawable(roundedBitmapDrawable);
             }
             if (id == R.id.nav_spam) {
                 tvNombre.setText(m.getFrom());
